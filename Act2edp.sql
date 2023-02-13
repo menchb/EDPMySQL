@@ -69,15 +69,118 @@ UPDATE MANAGER
 -- Stored Procedures 
     
 CREATE TABLE DEPTSAL AS
-	SELECT DNUMBER, 0 AS TOTALSALARY FROM DEPARTMENT
+	SELECT DNUMBER, 0 AS TOTALSALARY FROM DEPARTMENT;
     
+
 DELIMITER //
 
 CREATE PROCEDURE updateSalary (IN PARAML int)
 	begin
-		UPDATE DEPSTAL
+		UPDATE DEPTSAL
 			SET TOTALSALARY = (SELECT SUM(SALARY) FROM EMPLOYEE WHERE DNO = PARAML)
             WHERE DNUMBER = PARAML;
     end; //
     
+DELIMITER ; -- apparently di gumana query to change delimeter, idk why. note to search about this later
+
+call updateSalary(1);
+call updateSalary(2);
+call updateSalary(3);
+call updateSalary(4);
+
+DROP PROCEDURE updateSalary;
+
+DELIMITER $$
+
+CREATE PROCEDURE updateSalary()
+	begin
+		declare done int default 0;
+        declare current_dnum int;
+        declare dnumcur cursor for select dnumber from deptsal;
+        declare continue handler for not found set done = 1;
+        
+        open dnumcur;
+        
+        repeat
+			fetch dnumcur into current_dnum;
+            update deptsal
+				set totalsalary = (select sum(salary) from employee
+									where dno = current_dnum)
+				where dnumber = current_dnum;
+		until done
+        end repeat;
+        
+        close dnumcur;
+        
+    end$$
+    
 DELIMITER ;
+
+UPDATE DEPTSAL SET  TOTALSALARY = 0;
+
+CALL UPDATESALARY;
+
+DELIMITER |
+
+CREATE PROCEDURE GIVERAISE (IN AMOUNT DOUBLE)
+	BEGIN
+		DECLARE DONE INT DEFAULT 0;
+        DECLARE ID INT;
+        DECLARE SAL INT;
+        DECLARE EMPREC CURSOR FOR SELECT SSN, SALARY FROM EMPLOYEE;
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE = 1;
+        
+        OPEN EMPREC;
+        REPEAT
+			FETCH EMPREC INTO ID, SAL;
+            UPDATE EMPLOYEE SET SALARY = SAL + ROUND(SAL * AMOUNT)
+            WHERE ID = SSN;
+		UNTIL DONE
+        END REPEAT;
+    END |
+    
+DELIMITER ;
+
+DROP PROCEDURE GIVERAISE;
+
+CALL GIVERAISE(0.1);
+
+-- FUNCTIOOOOOOOOONSSS YAAAAAAAAAYY
+-- NOTES: Need admin privileges 
+
+DELIMITER |
+
+CREATE FUNCTION GIVERAISE (OLDVAL DOUBLE, AMOUNT DOUBLE)
+	RETURNS DOUBLE
+    DETERMINISTIC
+    BEGIN
+		DECLARE NEWVAL DOUBLE;
+        SET NEWVAL = OLDVAL  * (1 + AMOUNT);
+        RETURN NEWVAL;
+    END|
+    
+DELIMITER ;
+    
+SELECT SSN, SALARY, GIVERAISE(SALARY, 0.1) AS NEWSAL
+	FROM EMPLOYEE;
+    
+SELECT * FROM EMPLOYEE;
+   
+DELIMITER |
+
+CREATE TRIGGER UPDATE_SALARY
+	AFTER INSERT ON EMPLOYEE
+    FOR EACH ROW
+    BEGIN
+		IF NEW.DNO IS NOT NULL THEN
+			UPDATE DEPTSAL
+            SET TOTALSALARY = TOTALSALARY + NEW.SALARY
+            WHERE DNUMBER = NEW.DNO;
+		END IF;
+	END |
+    
+DELIMITER ;
+
+SELECT * FROM EMPLOYEE;
+
+INSERT INTO EMPLOYEE VALUES (1234567880, 'Rupi', 'Kaur', 30000, 4);
