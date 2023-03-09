@@ -15,7 +15,7 @@ CREATE TABLE BOOK
 INSERT INTO BOOK VALUES
 	(1234567890, 'Franklin D. Lewis', 'Rumi', 'Oneworld Publications', 2003, 100, 5),
 	(1234567891, 'Kristina Mahr', "Say It's the Sea", 'Independent', 2020, 200, 10),
-	(1234567892, 'Noor Shirazie', 'Into th Wildfire', NULL, 2016, 300, 15),
+	(1234567892, 'Noor Shirazie', 'Into the Wildfire', NULL, 2016, 300, 15),
 	(1234567893, 'Margaret Atwood', 'In Other Worlds', 'Knopf Doubleday Publishing Group', 2011, 400, 50),
 	(1234567894, 'Michael Faudet', 'Smoke & Mirrors', 'Andrews McMeel Publishing', 2017, 400, 30),
 	(1234567895, 'John Keats', 'Complete Poems', 'Random House Publishing Group', 2009, 210, 20),
@@ -24,6 +24,20 @@ INSERT INTO BOOK VALUES
     (1234567898, 'Trista Mateer', 'Honeybee', 'Central Avenue Publishing', 2018, 560, 40),
     (1234567899, 'Atticus', 'The Dark Between Stars', 'Atria Books', 2018, 600, 65),
     (1234567880, 'Pablo Neruda', 'Love Poems', 'New Directions', 2008, 525, 70);
+
+Update BOOK set title = 'Rumi' where isbn = 1234567890;
+Update BOOK set title = "Say It's the Sea" where isbn = 1234567891;
+Update BOOK set title = 'Into the Wildfire' where isbn = 1234567892;
+Update BOOK set title = 'In Other Worlds' where isbn = 1234567893;
+Update BOOK set title = 'Smoke & Mirrors' where isbn = 1234567894;
+Update BOOK set title = 'Complete Poems' where isbn = 1234567895;
+Update BOOK set title = 'Felicity' where isbn = 1234567896;
+Update BOOK set title = 'Howl and Other Poems' where isbn = 1234567897;
+Update BOOK set title = 'Honeybee' where isbn = 1234567898;
+Update BOOK set title = 'The Dark Between Stars' where isbn = 1234567899;
+Update BOOK set title = 'Love Poems' where isbn = 1234567880;
+Update BOOK set title = 'I Would Leave Me If I Could' where isbn = 1234567870;
+
 
 CREATE TABLE PUBLISHER SELECT PUBLISHER FROM BOOK WHERE PUBLISHER IS NOT NULL;
 
@@ -263,6 +277,7 @@ END |
 
 DELIMITER ;
 
+
 DROP TRIGGER DEL_ORDER;
 
 INSERT INTO `ORDER` VALUES (13, 3, '2023-02-25', 0);
@@ -271,3 +286,31 @@ INSERT INTO `ORDER_LINE` VALUES
     (17, 1234567891, 13, 100, 100, 1);
         
 DELETE FROM ORDER_LINE WHERE ID = 17;
+
+use bookin;
+
+Create table user
+(
+	username varchar (25) not null primary key,
+    password varchar(126)
+);
+
+insert into user values ('menchie', md5('menchie'));
+
+-- alter table `user` add column id 
+
+describe `order`;
+
+SELECT default_character_set_name FROM information_schema.SCHEMATA 
+WHERE schema_name = "bookin";
+
+SELECT CCSA.character_set_name FROM information_schema.`TABLES` T,
+       information_schema.`COLLATION_CHARACTER_SET_APPLICABILITY` CCSA
+WHERE CCSA.collation_name = T.table_collation
+  AND T.table_schema = "bookin"
+  AND T.table_name = "book";
+
+SELECT character_set_name FROM information_schema.`COLUMNS` 
+WHERE table_schema = "bookin"
+  AND table_name = "book"
+  AND column_name = "isbn";
