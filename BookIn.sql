@@ -314,3 +314,5 @@ SELECT character_set_name FROM information_schema.`COLUMNS`
 WHERE table_schema = "bookin"
   AND table_name = "book"
   AND column_name = "isbn";
+  
+  

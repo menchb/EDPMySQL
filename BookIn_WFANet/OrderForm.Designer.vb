@@ -43,13 +43,23 @@ Partial Class OrderForm
         Me.btnDeleteOrderLine = New System.Windows.Forms.Button()
         Me.btnUpdateOrderLine = New System.Windows.Forms.Button()
         Me.btnAddOrderLine = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Order_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Customer_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Order_Filled = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Order_Line_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ISBN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cost_Each = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cost_Line = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnBack
         '
         Me.btnBack.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(59, 474)
-        Me.btnBack.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(85, 47)
         Me.btnBack.TabIndex = 26
@@ -59,8 +69,8 @@ Partial Class OrderForm
         'btnDeleteOrder
         '
         Me.btnDeleteOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteOrder.Location = New System.Drawing.Point(416, 335)
-        Me.btnDeleteOrder.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDeleteOrder.Location = New System.Drawing.Point(289, 335)
+        Me.btnDeleteOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteOrder.Name = "btnDeleteOrder"
         Me.btnDeleteOrder.Size = New System.Drawing.Size(185, 47)
         Me.btnDeleteOrder.TabIndex = 25
@@ -70,8 +80,8 @@ Partial Class OrderForm
         'btnUpdateOrder
         '
         Me.btnUpdateOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateOrder.Location = New System.Drawing.Point(416, 280)
-        Me.btnUpdateOrder.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUpdateOrder.Location = New System.Drawing.Point(289, 280)
+        Me.btnUpdateOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdateOrder.Name = "btnUpdateOrder"
         Me.btnUpdateOrder.Size = New System.Drawing.Size(185, 47)
         Me.btnUpdateOrder.TabIndex = 24
@@ -81,8 +91,8 @@ Partial Class OrderForm
         'btnAddOrder
         '
         Me.btnAddOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddOrder.Location = New System.Drawing.Point(416, 225)
-        Me.btnAddOrder.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAddOrder.Location = New System.Drawing.Point(289, 225)
+        Me.btnAddOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddOrder.Name = "btnAddOrder"
         Me.btnAddOrder.Size = New System.Drawing.Size(185, 47)
         Me.btnAddOrder.TabIndex = 23
@@ -218,8 +228,8 @@ Partial Class OrderForm
         'btnDeleteOrderLine
         '
         Me.btnDeleteOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteOrderLine.Location = New System.Drawing.Point(416, 170)
-        Me.btnDeleteOrderLine.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDeleteOrderLine.Location = New System.Drawing.Point(289, 170)
+        Me.btnDeleteOrderLine.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteOrderLine.Name = "btnDeleteOrderLine"
         Me.btnDeleteOrderLine.Size = New System.Drawing.Size(185, 47)
         Me.btnDeleteOrderLine.TabIndex = 43
@@ -229,8 +239,8 @@ Partial Class OrderForm
         'btnUpdateOrderLine
         '
         Me.btnUpdateOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateOrderLine.Location = New System.Drawing.Point(416, 115)
-        Me.btnUpdateOrderLine.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUpdateOrderLine.Location = New System.Drawing.Point(289, 115)
+        Me.btnUpdateOrderLine.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdateOrderLine.Name = "btnUpdateOrderLine"
         Me.btnUpdateOrderLine.Size = New System.Drawing.Size(185, 47)
         Me.btnUpdateOrderLine.TabIndex = 42
@@ -240,20 +250,87 @@ Partial Class OrderForm
         'btnAddOrderLine
         '
         Me.btnAddOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddOrderLine.Location = New System.Drawing.Point(416, 60)
-        Me.btnAddOrderLine.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAddOrderLine.Location = New System.Drawing.Point(289, 60)
+        Me.btnAddOrderLine.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddOrderLine.Name = "btnAddOrderLine"
         Me.btnAddOrderLine.Size = New System.Drawing.Size(185, 47)
         Me.btnAddOrderLine.TabIndex = 41
         Me.btnAddOrderLine.Text = "Add Order Line"
         Me.btnAddOrderLine.UseVisualStyleBackColor = True
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Order_ID, Me.Customer_ID, Me.Order_Filled, Me.Order_Line_ID, Me.ISBN, Me.Cost_Each, Me.Quantity, Me.Cost_Line})
+        Me.DataGridView1.Location = New System.Drawing.Point(508, -2)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.RowTemplate.Height = 24
+        Me.DataGridView1.Size = New System.Drawing.Size(579, 559)
+        Me.DataGridView1.TabIndex = 44
+        '
+        'Order_ID
+        '
+        Me.Order_ID.HeaderText = "Order ID"
+        Me.Order_ID.MinimumWidth = 6
+        Me.Order_ID.Name = "Order_ID"
+        Me.Order_ID.Width = 50
+        '
+        'Customer_ID
+        '
+        Me.Customer_ID.HeaderText = "Customer ID"
+        Me.Customer_ID.MinimumWidth = 6
+        Me.Customer_ID.Name = "Customer_ID"
+        Me.Customer_ID.Width = 75
+        '
+        'Order_Filled
+        '
+        Me.Order_Filled.HeaderText = "Order Filled"
+        Me.Order_Filled.MinimumWidth = 6
+        Me.Order_Filled.Name = "Order_Filled"
+        Me.Order_Filled.Width = 50
+        '
+        'Order_Line_ID
+        '
+        Me.Order_Line_ID.HeaderText = "Order Line ID"
+        Me.Order_Line_ID.MinimumWidth = 6
+        Me.Order_Line_ID.Name = "Order_Line_ID"
+        Me.Order_Line_ID.Width = 50
+        '
+        'ISBN
+        '
+        Me.ISBN.HeaderText = "ISBN"
+        Me.ISBN.MinimumWidth = 6
+        Me.ISBN.Name = "ISBN"
+        '
+        'Cost_Each
+        '
+        Me.Cost_Each.HeaderText = "Cost Each"
+        Me.Cost_Each.MinimumWidth = 6
+        Me.Cost_Each.Name = "Cost_Each"
+        Me.Cost_Each.Width = 80
+        '
+        'Quantity
+        '
+        Me.Quantity.HeaderText = "Quantity"
+        Me.Quantity.MinimumWidth = 6
+        Me.Quantity.Name = "Quantity"
+        Me.Quantity.Width = 70
+        '
+        'Cost_Line
+        '
+        Me.Cost_Line.HeaderText = "Cost Line"
+        Me.Cost_Line.MinimumWidth = 6
+        Me.Cost_Line.Name = "Cost_Line"
+        Me.Cost_Line.Width = 80
+        '
         'OrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Azure
-        Me.ClientSize = New System.Drawing.Size(724, 554)
+        Me.ClientSize = New System.Drawing.Size(1086, 554)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnDeleteOrderLine)
         Me.Controls.Add(Me.btnUpdateOrderLine)
         Me.Controls.Add(Me.btnAddOrderLine)
@@ -278,6 +355,7 @@ Partial Class OrderForm
         Me.ForeColor = System.Drawing.Color.DarkSlateGray
         Me.Name = "OrderForm"
         Me.Text = "Order"
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -304,4 +382,13 @@ Partial Class OrderForm
     Friend WithEvents btnDeleteOrderLine As Button
     Friend WithEvents btnUpdateOrderLine As Button
     Friend WithEvents btnAddOrderLine As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Order_ID As DataGridViewTextBoxColumn
+    Friend WithEvents Customer_ID As DataGridViewTextBoxColumn
+    Friend WithEvents Order_Filled As DataGridViewTextBoxColumn
+    Friend WithEvents Order_Line_ID As DataGridViewTextBoxColumn
+    Friend WithEvents ISBN As DataGridViewTextBoxColumn
+    Friend WithEvents Cost_Each As DataGridViewTextBoxColumn
+    Friend WithEvents Quantity As DataGridViewTextBoxColumn
+    Friend WithEvents Cost_Line As DataGridViewTextBoxColumn
 End Class

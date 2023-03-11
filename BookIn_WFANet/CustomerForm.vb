@@ -115,7 +115,7 @@ Public Class CustomerForm
                 Call Clear_Boxes()
             Catch ex As MySqlException
                 MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
-                       & "Make sure to input an id to find the customer to update.")
+                       & "Make sure to input an id to find the customer to delete.")
             End Try
 
             Call Disconnect_to_DB()

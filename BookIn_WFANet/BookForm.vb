@@ -2,31 +2,41 @@
 
 Public Class BookForm
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+
         With Me
             Call Connect_to_DB()
             Dim mycmd As New MySqlCommand
 
             Try
                 ' Insert book info to database
-                Try
-                    strSQL = "Insert into book values (" _
-                    & .ISBNTextBox.Text & ", '" _
-                    & .TitleTextBox.Text & "', " _
-                    & .PublicationYearTextBox.Text & ", " _
-                    & .RetailPriceTextBox.Text & ", " _
-                    & .StocksTextBox.Text & ", " _
-                    & GetAuthorID() & ", " _
-                    & GetPublisherID() & ")"
+                If String.IsNullOrEmpty(.ISBNTextBox.Text) = False And
+                    String.IsNullOrEmpty(.TitleTextBox.Text) = False _
+                    And String.IsNullOrEmpty(.PublicationYearTextBox.Text) = False _
+                    And String.IsNullOrEmpty(.StocksTextBox.Text) = False _
+                    And String.IsNullOrEmpty(.RetailPriceTextBox.Text) = False Then
 
-                    mycmd.CommandText = strSQL
-                    mycmd.Connection = myconn
-                    mycmd.ExecuteNonQuery()
-                    MsgBox("Book successfully added.")
-                    Call Clear_Boxes()
-                Catch ex As MySqlException
-                    MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
-                           & "Make sure to input isbn, title, publication year, retail price, stocks, author, and publisher.")
-                End Try
+                    Try
+                        strSQL = "Insert into book values (" _
+                        & .ISBNTextBox.Text & ", '" _
+                        & .TitleTextBox.Text & "', " _
+                        & .PublicationYearTextBox.Text & ", " _
+                        & .RetailPriceTextBox.Text & ", " _
+                        & .StocksTextBox.Text & ", " _
+                        & GetAuthorID() & ", " _
+                        & GetPublisherID() & ")"
+
+                        mycmd.CommandText = strSQL
+                        mycmd.Connection = myconn
+                        mycmd.ExecuteNonQuery()
+                        MsgBox("Book successfully added.")
+                        Call Clear_Boxes()
+                    Catch ex As MySqlException
+                        MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
+                               & "Make sure to input isbn, title, publication year, retail price, stocks, author, and publisher.")
+                    End Try
+                Else
+                    MsgBox("Make sure to input isbn, title, publication year, retail price, stocks, author, and publisher.")
+                End If
 
             Catch ex As MySqlException
                 MsgBox(ex.Number & " " & ex.Message)
@@ -227,4 +237,5 @@ Public Class BookForm
             HomeForm.Show()
         End With
     End Sub
+
 End Class

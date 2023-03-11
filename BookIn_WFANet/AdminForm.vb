@@ -6,17 +6,22 @@ Public Class AdminForm
             Dim mycmd As New MySqlCommand
 
             Try
-                strSQL = "Insert into `user` (username, password) values ('" _
-                    & .UsernameTextBox.Text & "', MD5('" _
-                    & .PasswordTextBox.Text & "'))"
-                mycmd.CommandText = strSQL
-                mycmd.Connection = myconn
-                mycmd.ExecuteNonQuery()
-                MsgBox("User successfully added.")
-                Call Clear_Boxes()
+                If String.IsNullOrEmpty(.UsernameTextBox.Text) = False And String.IsNullOrEmpty(.PasswordTextBox.Text) = False Then
+                    strSQL = "Insert into `user` (username, password) values ('" _
+                        & .UsernameTextBox.Text & "', MD5('" _
+                        & .PasswordTextBox.Text & "'))"
+                    mycmd.CommandText = strSQL
+                    mycmd.Connection = myconn
+                    mycmd.ExecuteNonQuery()
+                    MsgBox("User successfully added.")
+                    Call Clear_Boxes()
+                Else
+                    MsgBox("Make sure to input username and password.")
+                End If
 
             Catch ex As MySqlException
-                MsgBox(ex.Number & " " & ex.Message)
+                MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
+                       & "Make sure to input username and password.")
             End Try
 
             Call Disconnect_to_DB()

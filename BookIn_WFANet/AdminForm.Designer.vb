@@ -32,6 +32,10 @@ Partial Class AdminForm
         Me.UsernameLabel = New System.Windows.Forms.Label()
         Me.PasswordTextBox = New System.Windows.Forms.TextBox()
         Me.PasswordLabel = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnBack
@@ -48,7 +52,7 @@ Partial Class AdminForm
         'btnDelete
         '
         Me.btnDelete.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Location = New System.Drawing.Point(396, 474)
+        Me.btnDelete.Location = New System.Drawing.Point(208, 474)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(85, 47)
@@ -59,7 +63,7 @@ Partial Class AdminForm
         'btnUpdate
         '
         Me.btnUpdate.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Location = New System.Drawing.Point(489, 474)
+        Me.btnUpdate.Location = New System.Drawing.Point(301, 474)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(85, 47)
@@ -70,7 +74,7 @@ Partial Class AdminForm
         'btnAdd
         '
         Me.btnAdd.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(582, 474)
+        Me.btnAdd.Location = New System.Drawing.Point(394, 474)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(85, 47)
@@ -82,7 +86,7 @@ Partial Class AdminForm
         '
         Me.IDLabel.AutoSize = True
         Me.IDLabel.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.IDLabel.Location = New System.Drawing.Point(245, 121)
+        Me.IDLabel.Location = New System.Drawing.Point(157, 122)
         Me.IDLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.IDLabel.Name = "IDLabel"
         Me.IDLabel.Size = New System.Drawing.Size(21, 17)
@@ -92,7 +96,7 @@ Partial Class AdminForm
         'IDTextBox
         '
         Me.IDTextBox.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.IDTextBox.Location = New System.Drawing.Point(249, 141)
+        Me.IDTextBox.Location = New System.Drawing.Point(161, 142)
         Me.IDTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.IDTextBox.Name = "IDTextBox"
         Me.IDTextBox.Size = New System.Drawing.Size(191, 23)
@@ -101,7 +105,7 @@ Partial Class AdminForm
         'UsernameTextBox
         '
         Me.UsernameTextBox.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.UsernameTextBox.Location = New System.Drawing.Point(249, 205)
+        Me.UsernameTextBox.Location = New System.Drawing.Point(161, 206)
         Me.UsernameTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.UsernameTextBox.Name = "UsernameTextBox"
         Me.UsernameTextBox.Size = New System.Drawing.Size(191, 23)
@@ -111,7 +115,7 @@ Partial Class AdminForm
         '
         Me.UsernameLabel.AutoSize = True
         Me.UsernameLabel.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.UsernameLabel.Location = New System.Drawing.Point(245, 185)
+        Me.UsernameLabel.Location = New System.Drawing.Point(157, 186)
         Me.UsernameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.UsernameLabel.Name = "UsernameLabel"
         Me.UsernameLabel.Size = New System.Drawing.Size(66, 17)
@@ -121,7 +125,7 @@ Partial Class AdminForm
         'PasswordTextBox
         '
         Me.PasswordTextBox.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PasswordTextBox.Location = New System.Drawing.Point(249, 272)
+        Me.PasswordTextBox.Location = New System.Drawing.Point(161, 273)
         Me.PasswordTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.PasswordTextBox.Name = "PasswordTextBox"
         Me.PasswordTextBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -132,19 +136,45 @@ Partial Class AdminForm
         '
         Me.PasswordLabel.AutoSize = True
         Me.PasswordLabel.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PasswordLabel.Location = New System.Drawing.Point(245, 252)
+        Me.PasswordLabel.Location = New System.Drawing.Point(157, 253)
         Me.PasswordLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.PasswordLabel.Name = "PasswordLabel"
         Me.PasswordLabel.Size = New System.Drawing.Size(61, 17)
         Me.PasswordLabel.TabIndex = 29
         Me.PasswordLabel.Text = "Password"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Username})
+        Me.DataGridView1.Location = New System.Drawing.Point(508, -2)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.RowTemplate.Height = 24
+        Me.DataGridView1.Size = New System.Drawing.Size(579, 559)
+        Me.DataGridView1.TabIndex = 47
+        '
+        'ID
+        '
+        Me.ID.HeaderText = "ID"
+        Me.ID.MinimumWidth = 6
+        Me.ID.Name = "ID"
+        Me.ID.Width = 200
+        '
+        'Username
+        '
+        Me.Username.HeaderText = "Username"
+        Me.Username.MinimumWidth = 6
+        Me.Username.Name = "Username"
+        Me.Username.Width = 350
+        '
         'AdminForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Azure
-        Me.ClientSize = New System.Drawing.Size(724, 554)
+        Me.ClientSize = New System.Drawing.Size(1086, 554)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.PasswordTextBox)
         Me.Controls.Add(Me.PasswordLabel)
         Me.Controls.Add(Me.UsernameTextBox)
@@ -159,6 +189,7 @@ Partial Class AdminForm
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "AdminForm"
         Me.Text = "Admin"
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -174,4 +205,7 @@ Partial Class AdminForm
     Friend WithEvents UsernameLabel As Label
     Friend WithEvents PasswordTextBox As TextBox
     Friend WithEvents PasswordLabel As Label
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents ID As DataGridViewTextBoxColumn
+    Friend WithEvents Username As DataGridViewTextBoxColumn
 End Class

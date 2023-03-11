@@ -46,30 +46,37 @@ Public Class OrderForm
             Dim myreader As MySqlDataReader
 
             Try
-                strSQL = "Insert into `order_line` (ISBN, order_id, cost_each, quantity, cost_line) values (" _
-                    & .ISBNTextBox.Text & ", " _
-                    & .OrderIDTextBox.Text & ", " _
-                    & .CostEachTextBox.Text & ", " _
-                    & .QuantityTextBox.Text & ", " _
-                    & (CInt(.CostEachTextBox.Text) * CInt(.QuantityTextBox.Text)) & ")"
-                mycmd.CommandText = strSQL
-                mycmd.Connection = myconn
-                mycmd.ExecuteNonQuery()
-                Try
-                    strSQL = "Select id from `order_line` order by id desc limit 1"
+                If String.IsNullOrEmpty(.ISBNTextBox.Text) = False And
+                    String.IsNullOrEmpty(.OrderIDTextBox.Text) = False _
+                    And String.IsNullOrEmpty(.CostEachTextBox.Text) = False _
+                    And String.IsNullOrEmpty(.QuantityTextBox.Text) = False Then
+                    strSQL = "Insert into `order_line` (ISBN, order_id, cost_each, quantity, cost_line) values (" _
+                        & .ISBNTextBox.Text & ", " _
+                        & .OrderIDTextBox.Text & ", " _
+                        & .CostEachTextBox.Text & ", " _
+                        & .QuantityTextBox.Text & ", " _
+                        & (CInt(.CostEachTextBox.Text) * CInt(.QuantityTextBox.Text)) & ")"
                     mycmd.CommandText = strSQL
                     mycmd.Connection = myconn
-                    myreader = mycmd.ExecuteReader()
-                    If myreader.HasRows Then
-                        While myreader.Read()
-                            MsgBox("Order successfully added. Order Line ID: " & myreader.GetString("id"))
-                        End While
+                    mycmd.ExecuteNonQuery()
+                    Try
+                        strSQL = "Select id from `order_line` order by id desc limit 1"
+                        mycmd.CommandText = strSQL
+                        mycmd.Connection = myconn
+                        myreader = mycmd.ExecuteReader()
+                        If myreader.HasRows Then
+                            While myreader.Read()
+                                MsgBox("Order successfully added. Order Line ID: " & myreader.GetString("id"))
+                            End While
 
-                        Call Clear_Boxes()
-                    End If
-                Catch ex As MySqlException
-                    MsgBox(ex.Number & " " & ex.Message)
-                End Try
+                            Call Clear_Boxes()
+                        End If
+                    Catch ex As MySqlException
+                        MsgBox(ex.Number & " " & ex.Message)
+                    End Try
+                Else
+                    MsgBox("Make sure to input an isbn, order id, cost or price, and quantity to add a new order line to an order.")
+                End If
 
             Catch ex As MySqlException
                 MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
@@ -83,6 +90,7 @@ Public Class OrderForm
         With Me
             Call Connect_to_DB()
             Dim mycmd As New MySqlCommand
+            Dim updated As Integer = 0
 
             Try
                 If (String.IsNullOrEmpty(.ISBNTextBox.Text) = False) Then
@@ -90,21 +98,28 @@ Public Class OrderForm
                     mycmd.CommandText = strSQL
                     mycmd.Connection = myconn
                     mycmd.ExecuteNonQuery()
+                    updated = 1
                 End If
                 If (String.IsNullOrEmpty(.CostEachTextBox.Text) = False) Then
                     strSQL = "Update order_line set cost_each = " & .CostEachTextBox.Text & " where id = " & .OrderLineIDTextBox.Text
                     mycmd.CommandText = strSQL
                     mycmd.Connection = myconn
                     mycmd.ExecuteNonQuery()
+                    updated = 1
                 End If
                 If (String.IsNullOrEmpty(.QuantityTextBox.Text) = False) Then
                     strSQL = "Update order_line set quantity = " & .QuantityTextBox.Text & " where id = " & .OrderLineIDTextBox.Text
                     mycmd.CommandText = strSQL
                     mycmd.Connection = myconn
                     mycmd.ExecuteNonQuery()
+                    updated = 1
                 End If
-                MsgBox("Order line successfully updated.")
-                Call Clear_Boxes()
+                If updated Then
+                    MsgBox("Order line successfully updated.")
+                    Call Clear_Boxes()
+                Else
+                    MsgBox("Make sure to input an order line id to find the order line and a data to update.")
+                End If
 
             Catch ex As MySqlException
                 MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
@@ -144,6 +159,7 @@ Public Class OrderForm
         With Me
             Call Connect_to_DB()
             Dim mycmd As New MySqlCommand
+            Dim updated As Integer = 0
 
             Try
                 If (String.IsNullOrEmpty(.CustomerIDTextBox.Text) = False) Then
@@ -151,16 +167,23 @@ Public Class OrderForm
                     mycmd.CommandText = strSQL
                     mycmd.Connection = myconn
                     mycmd.ExecuteNonQuery()
-
+                    updated = 1
                 End If
                 If (String.IsNullOrEmpty(.OrderFilledTextBox.Text) = False) Then
                     strSQL = "Update `order` set order_filled = " & .OrderFilledTextBox.Text & " where order_id = " & .OrderIDTextBox.Text
                     mycmd.CommandText = strSQL
                     mycmd.Connection = myconn
                     mycmd.ExecuteNonQuery()
+                    updated = 1
                 End If
-                MsgBox("Order successfully updated.")
-                Call Clear_Boxes()
+
+                If updated Then
+                    MsgBox("Order successfully updated.")
+                    Call Clear_Boxes()
+                Else
+                    MsgBox("Make sure to input an order id to find the order and a data to update.")
+                End If
+
 
             Catch ex As MySqlException
                 MsgBox(ex.Number & " " & ex.Message & vbCrLf & vbCrLf _
