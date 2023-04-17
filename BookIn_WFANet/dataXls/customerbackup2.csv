@@ -1,0 +1,13 @@
+ID,FIRST_NAME,LAST_NAME,CITY,PROVINCE,ZIP,PHONE,EMAIL,TOTAL_SPENT
+1,Menchie,Belarmino,Tabaco City,Albay,4511,09001122334,mench@email.com,1000
+2,Jane,Doe,Legazpi City,Albay,4500,09012345678,janedoe@email.com,3700
+3,John,Doe,Legazpi City,Albay,4500,09123456789,johndoe@email.com,400
+4,John,Smith,Sorsogon City,Sorsogon,4700,09234567891,johnsmith@email.com,800
+5,Jane,Smith,Sorsogon City,Sorsogon,4700,09345678912,janesmith@email.com,1450
+6,Juan,Delacruz,Camalig,Albay,4502,09456789123,juandelacruz@email.com,2000
+7,Juanita,Delacruz,Bato,Camarines Sur,4435,09567891234,juanitadelacruz@email.com,1375
+8,James,Potter,Daet,Camarines Norte,4600,09678901234,jamespotter@email.com,3900
+9,Lily,Potter,Daet,Camarines Norte,4600,09001112222,lilypotter@email.com,100
+10,Harry,Potter,Daet,Camarines Norte,4600,9112223333,harrypotter@gmail.com,100
+11,Mench,Bela,Tabaco City,Albay,4511,09001122337,mench2@email.com,0
+,,,,,,,,
