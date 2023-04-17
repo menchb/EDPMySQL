@@ -22,6 +22,7 @@ Partial Class CustomerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.IDTextBox = New System.Windows.Forms.TextBox()
         Me.IDLabel = New System.Windows.Forms.Label()
         Me.FirstNameLabel = New System.Windows.Forms.Label()
@@ -42,16 +43,22 @@ Partial Class CustomerForm
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.First_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Last_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.City = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Province = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ZIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Phone = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgCustomer = New System.Windows.Forms.DataGridView()
+        Me.btnReload = New System.Windows.Forms.Button()
+        Me.btnExportCustomer = New System.Windows.Forms.Button()
+        Me.btnImportCustomer = New System.Windows.Forms.Button()
+        Me.CustomerBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FIRSTNAMEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LASTNAMEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CITYDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PROVINCEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ZIPDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PHONEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EMAILDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TOTALSPENTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.dgCustomer, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CustomerBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'IDTextBox
@@ -258,79 +265,145 @@ Partial Class CustomerForm
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dgCustomer
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.First_Name, Me.Last_Name, Me.City, Me.Province, Me.ZIP, Me.Phone, Me.Email})
-        Me.DataGridView1.Location = New System.Drawing.Point(508, -2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(579, 559)
-        Me.DataGridView1.TabIndex = 45
+        Me.dgCustomer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgCustomer.AutoGenerateColumns = False
+        Me.dgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgCustomer.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.FIRSTNAMEDataGridViewTextBoxColumn, Me.LASTNAMEDataGridViewTextBoxColumn, Me.CITYDataGridViewTextBoxColumn, Me.PROVINCEDataGridViewTextBoxColumn, Me.ZIPDataGridViewTextBoxColumn, Me.PHONEDataGridViewTextBoxColumn, Me.EMAILDataGridViewTextBoxColumn, Me.TOTALSPENTDataGridViewTextBoxColumn})
+        Me.dgCustomer.DataSource = Me.CustomerBindingSource
+        Me.dgCustomer.Location = New System.Drawing.Point(508, -2)
+        Me.dgCustomer.Name = "dgCustomer"
+        Me.dgCustomer.RowHeadersWidth = 51
+        Me.dgCustomer.RowTemplate.Height = 24
+        Me.dgCustomer.Size = New System.Drawing.Size(579, 734)
+        Me.dgCustomer.TabIndex = 45
         '
-        'ID
+        'btnReload
         '
-        Me.ID.HeaderText = "ID"
-        Me.ID.MinimumWidth = 6
-        Me.ID.Name = "ID"
-        Me.ID.Width = 20
+        Me.btnReload.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReload.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnReload.Location = New System.Drawing.Point(208, 637)
+        Me.btnReload.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReload.Name = "btnReload"
+        Me.btnReload.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnReload.Size = New System.Drawing.Size(85, 47)
+        Me.btnReload.TabIndex = 52
+        Me.btnReload.Text = "Reload"
+        Me.btnReload.UseVisualStyleBackColor = True
         '
-        'First_Name
+        'btnExportCustomer
         '
-        Me.First_Name.HeaderText = "First Name"
-        Me.First_Name.MinimumWidth = 6
-        Me.First_Name.Name = "First_Name"
-        Me.First_Name.Width = 80
+        Me.btnExportCustomer.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportCustomer.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnExportCustomer.Location = New System.Drawing.Point(301, 637)
+        Me.btnExportCustomer.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnExportCustomer.Name = "btnExportCustomer"
+        Me.btnExportCustomer.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnExportCustomer.Size = New System.Drawing.Size(85, 47)
+        Me.btnExportCustomer.TabIndex = 51
+        Me.btnExportCustomer.Text = "Export"
+        Me.btnExportCustomer.UseVisualStyleBackColor = True
         '
-        'Last_Name
+        'btnImportCustomer
         '
-        Me.Last_Name.HeaderText = "Last Name"
-        Me.Last_Name.MinimumWidth = 6
-        Me.Last_Name.Name = "Last_Name"
-        Me.Last_Name.Width = 80
+        Me.btnImportCustomer.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportCustomer.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnImportCustomer.Location = New System.Drawing.Point(394, 637)
+        Me.btnImportCustomer.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnImportCustomer.Name = "btnImportCustomer"
+        Me.btnImportCustomer.Size = New System.Drawing.Size(85, 47)
+        Me.btnImportCustomer.TabIndex = 50
+        Me.btnImportCustomer.Text = "Import"
+        Me.btnImportCustomer.UseVisualStyleBackColor = True
         '
-        'City
+        'CustomerBindingSource
         '
-        Me.City.HeaderText = "City"
-        Me.City.MinimumWidth = 6
-        Me.City.Name = "City"
-        Me.City.Width = 80
+        Me.CustomerBindingSource.DataSource = GetType(BookIn_WFANet.Customer)
         '
-        'Province
+        'IDDataGridViewTextBoxColumn
         '
-        Me.Province.HeaderText = "Province"
-        Me.Province.MinimumWidth = 6
-        Me.Province.Name = "Province"
-        Me.Province.Width = 80
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.Width = 125
         '
-        'ZIP
+        'FIRSTNAMEDataGridViewTextBoxColumn
         '
-        Me.ZIP.HeaderText = "ZIP"
-        Me.ZIP.MinimumWidth = 6
-        Me.ZIP.Name = "ZIP"
-        Me.ZIP.Width = 40
+        Me.FIRSTNAMEDataGridViewTextBoxColumn.DataPropertyName = "FIRST_NAME"
+        Me.FIRSTNAMEDataGridViewTextBoxColumn.HeaderText = "FIRST_NAME"
+        Me.FIRSTNAMEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.FIRSTNAMEDataGridViewTextBoxColumn.Name = "FIRSTNAMEDataGridViewTextBoxColumn"
+        Me.FIRSTNAMEDataGridViewTextBoxColumn.Width = 125
         '
-        'Phone
+        'LASTNAMEDataGridViewTextBoxColumn
         '
-        Me.Phone.HeaderText = "Phone"
-        Me.Phone.MinimumWidth = 6
-        Me.Phone.Name = "Phone"
-        Me.Phone.Width = 70
+        Me.LASTNAMEDataGridViewTextBoxColumn.DataPropertyName = "LAST_NAME"
+        Me.LASTNAMEDataGridViewTextBoxColumn.HeaderText = "LAST_NAME"
+        Me.LASTNAMEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.LASTNAMEDataGridViewTextBoxColumn.Name = "LASTNAMEDataGridViewTextBoxColumn"
+        Me.LASTNAMEDataGridViewTextBoxColumn.Width = 125
         '
-        'Email
+        'CITYDataGridViewTextBoxColumn
         '
-        Me.Email.HeaderText = "Email"
-        Me.Email.MinimumWidth = 6
-        Me.Email.Name = "Email"
-        Me.Email.Width = 80
+        Me.CITYDataGridViewTextBoxColumn.DataPropertyName = "CITY"
+        Me.CITYDataGridViewTextBoxColumn.HeaderText = "CITY"
+        Me.CITYDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.CITYDataGridViewTextBoxColumn.Name = "CITYDataGridViewTextBoxColumn"
+        Me.CITYDataGridViewTextBoxColumn.Width = 125
+        '
+        'PROVINCEDataGridViewTextBoxColumn
+        '
+        Me.PROVINCEDataGridViewTextBoxColumn.DataPropertyName = "PROVINCE"
+        Me.PROVINCEDataGridViewTextBoxColumn.HeaderText = "PROVINCE"
+        Me.PROVINCEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.PROVINCEDataGridViewTextBoxColumn.Name = "PROVINCEDataGridViewTextBoxColumn"
+        Me.PROVINCEDataGridViewTextBoxColumn.Width = 125
+        '
+        'ZIPDataGridViewTextBoxColumn
+        '
+        Me.ZIPDataGridViewTextBoxColumn.DataPropertyName = "ZIP"
+        Me.ZIPDataGridViewTextBoxColumn.HeaderText = "ZIP"
+        Me.ZIPDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.ZIPDataGridViewTextBoxColumn.Name = "ZIPDataGridViewTextBoxColumn"
+        Me.ZIPDataGridViewTextBoxColumn.Width = 125
+        '
+        'PHONEDataGridViewTextBoxColumn
+        '
+        Me.PHONEDataGridViewTextBoxColumn.DataPropertyName = "PHONE"
+        Me.PHONEDataGridViewTextBoxColumn.HeaderText = "PHONE"
+        Me.PHONEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.PHONEDataGridViewTextBoxColumn.Name = "PHONEDataGridViewTextBoxColumn"
+        Me.PHONEDataGridViewTextBoxColumn.Width = 125
+        '
+        'EMAILDataGridViewTextBoxColumn
+        '
+        Me.EMAILDataGridViewTextBoxColumn.DataPropertyName = "EMAIL"
+        Me.EMAILDataGridViewTextBoxColumn.HeaderText = "EMAIL"
+        Me.EMAILDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.EMAILDataGridViewTextBoxColumn.Name = "EMAILDataGridViewTextBoxColumn"
+        Me.EMAILDataGridViewTextBoxColumn.Width = 125
+        '
+        'TOTALSPENTDataGridViewTextBoxColumn
+        '
+        Me.TOTALSPENTDataGridViewTextBoxColumn.DataPropertyName = "TOTAL_SPENT"
+        Me.TOTALSPENTDataGridViewTextBoxColumn.HeaderText = "TOTAL_SPENT"
+        Me.TOTALSPENTDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.TOTALSPENTDataGridViewTextBoxColumn.Name = "TOTALSPENTDataGridViewTextBoxColumn"
+        Me.TOTALSPENTDataGridViewTextBoxColumn.Width = 125
         '
         'CustomerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Azure
-        Me.ClientSize = New System.Drawing.Size(1086, 554)
+        Me.ClientSize = New System.Drawing.Size(1086, 729)
+        Me.Controls.Add(Me.btnReload)
+        Me.Controls.Add(Me.btnExportCustomer)
+        Me.Controls.Add(Me.btnImportCustomer)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
@@ -351,12 +424,13 @@ Partial Class CustomerForm
         Me.Controls.Add(Me.FirstNameTextBox)
         Me.Controls.Add(Me.IDLabel)
         Me.Controls.Add(Me.IDTextBox)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dgCustomer)
         Me.ForeColor = System.Drawing.Color.DarkSlateGray
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "CustomerForm"
         Me.Text = "Customer"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgCustomer, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CustomerBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -382,13 +456,18 @@ Partial Class CustomerForm
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnBack As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents First_Name As DataGridViewTextBoxColumn
-    Friend WithEvents Last_Name As DataGridViewTextBoxColumn
-    Friend WithEvents City As DataGridViewTextBoxColumn
-    Friend WithEvents Province As DataGridViewTextBoxColumn
-    Friend WithEvents ZIP As DataGridViewTextBoxColumn
-    Friend WithEvents Phone As DataGridViewTextBoxColumn
-    Friend WithEvents Email As DataGridViewTextBoxColumn
+    Friend WithEvents dgCustomer As DataGridView
+    Friend WithEvents btnReload As Button
+    Friend WithEvents btnExportCustomer As Button
+    Friend WithEvents btnImportCustomer As Button
+    Friend WithEvents CustomerBindingSource As BindingSource
+    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FIRSTNAMEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents LASTNAMEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CITYDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PROVINCEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ZIPDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PHONEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents EMAILDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents TOTALSPENTDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class

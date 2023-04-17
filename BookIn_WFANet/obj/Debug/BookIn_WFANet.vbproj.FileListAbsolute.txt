@@ -1,4 +1,3 @@
-D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.vbproj.AssemblyReference.cache
 D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.exe.config
 D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.Resources.resources
 D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.vbproj.GenerateResource.cache
@@ -27,3 +26,4 @@ D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.BookForm.resources
 D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.CustomerForm.resources
 D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.AdminForm.resources
 D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.OrderForm.resources
+D:\GitHub\EDPMySQL\BookIn_WFANet\obj\Debug\BookIn_WFANet.vbproj.AssemblyReference.cache

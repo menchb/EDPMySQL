@@ -22,6 +22,7 @@ Partial Class OrderForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnDeleteOrder = New System.Windows.Forms.Button()
         Me.btnUpdateOrder = New System.Windows.Forms.Button()
@@ -43,16 +44,30 @@ Partial Class OrderForm
         Me.btnDeleteOrderLine = New System.Windows.Forms.Button()
         Me.btnUpdateOrderLine = New System.Windows.Forms.Button()
         Me.btnAddOrderLine = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Order_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Customer_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Order_Filled = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Order_Line_ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ISBN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cost_Each = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cost_Line = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgOrder = New System.Windows.Forms.DataGridView()
+        Me.OrderidDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CUSTOMERIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ORDERDATEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ORDERFILLEDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OrderBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnReloadOrder = New System.Windows.Forms.Button()
+        Me.btnExportOrder = New System.Windows.Forms.Button()
+        Me.btnImportOrder = New System.Windows.Forms.Button()
+        Me.dgOrderLine = New System.Windows.Forms.DataGridView()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ISBNDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ORDERIDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.COSTEACHDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.COSTLINEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QUANTITYDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OrderLineBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnReloadOrderLine = New System.Windows.Forms.Button()
+        Me.btnExportOrderLine = New System.Windows.Forms.Button()
+        Me.btnImportOrderLine = New System.Windows.Forms.Button()
+        CType(Me.dgOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OrderBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgOrderLine, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OrderLineBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnBack
@@ -69,7 +84,7 @@ Partial Class OrderForm
         'btnDeleteOrder
         '
         Me.btnDeleteOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteOrder.Location = New System.Drawing.Point(289, 335)
+        Me.btnDeleteOrder.Location = New System.Drawing.Point(289, 381)
         Me.btnDeleteOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteOrder.Name = "btnDeleteOrder"
         Me.btnDeleteOrder.Size = New System.Drawing.Size(185, 47)
@@ -80,7 +95,7 @@ Partial Class OrderForm
         'btnUpdateOrder
         '
         Me.btnUpdateOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateOrder.Location = New System.Drawing.Point(289, 280)
+        Me.btnUpdateOrder.Location = New System.Drawing.Point(289, 326)
         Me.btnUpdateOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdateOrder.Name = "btnUpdateOrder"
         Me.btnUpdateOrder.Size = New System.Drawing.Size(185, 47)
@@ -91,7 +106,7 @@ Partial Class OrderForm
         'btnAddOrder
         '
         Me.btnAddOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddOrder.Location = New System.Drawing.Point(289, 225)
+        Me.btnAddOrder.Location = New System.Drawing.Point(289, 271)
         Me.btnAddOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddOrder.Name = "btnAddOrder"
         Me.btnAddOrder.Size = New System.Drawing.Size(185, 47)
@@ -228,7 +243,7 @@ Partial Class OrderForm
         'btnDeleteOrderLine
         '
         Me.btnDeleteOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteOrderLine.Location = New System.Drawing.Point(289, 170)
+        Me.btnDeleteOrderLine.Location = New System.Drawing.Point(289, 161)
         Me.btnDeleteOrderLine.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteOrderLine.Name = "btnDeleteOrderLine"
         Me.btnDeleteOrderLine.Size = New System.Drawing.Size(185, 47)
@@ -239,7 +254,7 @@ Partial Class OrderForm
         'btnUpdateOrderLine
         '
         Me.btnUpdateOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateOrderLine.Location = New System.Drawing.Point(289, 115)
+        Me.btnUpdateOrderLine.Location = New System.Drawing.Point(289, 106)
         Me.btnUpdateOrderLine.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdateOrderLine.Name = "btnUpdateOrderLine"
         Me.btnUpdateOrderLine.Size = New System.Drawing.Size(185, 47)
@@ -250,7 +265,7 @@ Partial Class OrderForm
         'btnAddOrderLine
         '
         Me.btnAddOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddOrderLine.Location = New System.Drawing.Point(289, 60)
+        Me.btnAddOrderLine.Location = New System.Drawing.Point(289, 51)
         Me.btnAddOrderLine.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddOrderLine.Name = "btnAddOrderLine"
         Me.btnAddOrderLine.Size = New System.Drawing.Size(185, 47)
@@ -258,79 +273,216 @@ Partial Class OrderForm
         Me.btnAddOrderLine.Text = "Add Order Line"
         Me.btnAddOrderLine.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dgOrder
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Order_ID, Me.Customer_ID, Me.Order_Filled, Me.Order_Line_ID, Me.ISBN, Me.Cost_Each, Me.Quantity, Me.Cost_Line})
-        Me.DataGridView1.Location = New System.Drawing.Point(508, -2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(579, 559)
-        Me.DataGridView1.TabIndex = 44
+        Me.dgOrder.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgOrder.AutoGenerateColumns = False
+        Me.dgOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.OrderidDataGridViewTextBoxColumn, Me.CUSTOMERIDDataGridViewTextBoxColumn, Me.ORDERDATEDataGridViewTextBoxColumn, Me.ORDERFILLEDDataGridViewTextBoxColumn})
+        Me.dgOrder.DataSource = Me.OrderBindingSource
+        Me.dgOrder.Location = New System.Drawing.Point(690, -6)
+        Me.dgOrder.Name = "dgOrder"
+        Me.dgOrder.RowHeadersWidth = 51
+        Me.dgOrder.RowTemplate.Height = 24
+        Me.dgOrder.Size = New System.Drawing.Size(607, 373)
+        Me.dgOrder.TabIndex = 44
         '
-        'Order_ID
+        'OrderidDataGridViewTextBoxColumn
         '
-        Me.Order_ID.HeaderText = "Order ID"
-        Me.Order_ID.MinimumWidth = 6
-        Me.Order_ID.Name = "Order_ID"
-        Me.Order_ID.Width = 50
+        Me.OrderidDataGridViewTextBoxColumn.DataPropertyName = "order_id"
+        Me.OrderidDataGridViewTextBoxColumn.HeaderText = "order_id"
+        Me.OrderidDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.OrderidDataGridViewTextBoxColumn.Name = "OrderidDataGridViewTextBoxColumn"
+        Me.OrderidDataGridViewTextBoxColumn.Width = 125
         '
-        'Customer_ID
+        'CUSTOMERIDDataGridViewTextBoxColumn
         '
-        Me.Customer_ID.HeaderText = "Customer ID"
-        Me.Customer_ID.MinimumWidth = 6
-        Me.Customer_ID.Name = "Customer_ID"
-        Me.Customer_ID.Width = 75
+        Me.CUSTOMERIDDataGridViewTextBoxColumn.DataPropertyName = "CUSTOMER_ID"
+        Me.CUSTOMERIDDataGridViewTextBoxColumn.HeaderText = "CUSTOMER_ID"
+        Me.CUSTOMERIDDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.CUSTOMERIDDataGridViewTextBoxColumn.Name = "CUSTOMERIDDataGridViewTextBoxColumn"
+        Me.CUSTOMERIDDataGridViewTextBoxColumn.Width = 125
         '
-        'Order_Filled
+        'ORDERDATEDataGridViewTextBoxColumn
         '
-        Me.Order_Filled.HeaderText = "Order Filled"
-        Me.Order_Filled.MinimumWidth = 6
-        Me.Order_Filled.Name = "Order_Filled"
-        Me.Order_Filled.Width = 50
+        Me.ORDERDATEDataGridViewTextBoxColumn.DataPropertyName = "ORDER_DATE"
+        Me.ORDERDATEDataGridViewTextBoxColumn.HeaderText = "ORDER_DATE"
+        Me.ORDERDATEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.ORDERDATEDataGridViewTextBoxColumn.Name = "ORDERDATEDataGridViewTextBoxColumn"
+        Me.ORDERDATEDataGridViewTextBoxColumn.Width = 125
         '
-        'Order_Line_ID
+        'ORDERFILLEDDataGridViewTextBoxColumn
         '
-        Me.Order_Line_ID.HeaderText = "Order Line ID"
-        Me.Order_Line_ID.MinimumWidth = 6
-        Me.Order_Line_ID.Name = "Order_Line_ID"
-        Me.Order_Line_ID.Width = 50
+        Me.ORDERFILLEDDataGridViewTextBoxColumn.DataPropertyName = "ORDER_FILLED"
+        Me.ORDERFILLEDDataGridViewTextBoxColumn.HeaderText = "ORDER_FILLED"
+        Me.ORDERFILLEDDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.ORDERFILLEDDataGridViewTextBoxColumn.Name = "ORDERFILLEDDataGridViewTextBoxColumn"
+        Me.ORDERFILLEDDataGridViewTextBoxColumn.Width = 125
         '
-        'ISBN
+        'OrderBindingSource
         '
-        Me.ISBN.HeaderText = "ISBN"
-        Me.ISBN.MinimumWidth = 6
-        Me.ISBN.Name = "ISBN"
+        Me.OrderBindingSource.DataSource = GetType(BookIn_WFANet.Order)
         '
-        'Cost_Each
+        'btnReloadOrder
         '
-        Me.Cost_Each.HeaderText = "Cost Each"
-        Me.Cost_Each.MinimumWidth = 6
-        Me.Cost_Each.Name = "Cost_Each"
-        Me.Cost_Each.Width = 80
+        Me.btnReloadOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReloadOrder.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnReloadOrder.Location = New System.Drawing.Point(578, 290)
+        Me.btnReloadOrder.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReloadOrder.Name = "btnReloadOrder"
+        Me.btnReloadOrder.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnReloadOrder.Size = New System.Drawing.Size(85, 47)
+        Me.btnReloadOrder.TabIndex = 52
+        Me.btnReloadOrder.Text = "Reload"
+        Me.btnReloadOrder.UseVisualStyleBackColor = True
         '
-        'Quantity
+        'btnExportOrder
         '
-        Me.Quantity.HeaderText = "Quantity"
-        Me.Quantity.MinimumWidth = 6
-        Me.Quantity.Name = "Quantity"
-        Me.Quantity.Width = 70
+        Me.btnExportOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportOrder.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnExportOrder.Location = New System.Drawing.Point(578, 235)
+        Me.btnExportOrder.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnExportOrder.Name = "btnExportOrder"
+        Me.btnExportOrder.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnExportOrder.Size = New System.Drawing.Size(85, 47)
+        Me.btnExportOrder.TabIndex = 51
+        Me.btnExportOrder.Text = "Export"
+        Me.btnExportOrder.UseVisualStyleBackColor = True
         '
-        'Cost_Line
+        'btnImportOrder
         '
-        Me.Cost_Line.HeaderText = "Cost Line"
-        Me.Cost_Line.MinimumWidth = 6
-        Me.Cost_Line.Name = "Cost_Line"
-        Me.Cost_Line.Width = 80
+        Me.btnImportOrder.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportOrder.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnImportOrder.Location = New System.Drawing.Point(578, 180)
+        Me.btnImportOrder.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnImportOrder.Name = "btnImportOrder"
+        Me.btnImportOrder.Size = New System.Drawing.Size(85, 47)
+        Me.btnImportOrder.TabIndex = 50
+        Me.btnImportOrder.Text = "Import"
+        Me.btnImportOrder.UseVisualStyleBackColor = True
+        '
+        'dgOrderLine
+        '
+        Me.dgOrderLine.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgOrderLine.AutoGenerateColumns = False
+        Me.dgOrderLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgOrderLine.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.ISBNDataGridViewTextBoxColumn, Me.ORDERIDDataGridViewTextBoxColumn1, Me.COSTEACHDataGridViewTextBoxColumn, Me.COSTLINEDataGridViewTextBoxColumn, Me.QUANTITYDataGridViewTextBoxColumn})
+        Me.dgOrderLine.DataSource = Me.OrderLineBindingSource
+        Me.dgOrderLine.Location = New System.Drawing.Point(690, 371)
+        Me.dgOrderLine.Name = "dgOrderLine"
+        Me.dgOrderLine.RowHeadersWidth = 51
+        Me.dgOrderLine.RowTemplate.Height = 24
+        Me.dgOrderLine.Size = New System.Drawing.Size(607, 360)
+        Me.dgOrderLine.TabIndex = 53
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.Width = 125
+        '
+        'ISBNDataGridViewTextBoxColumn
+        '
+        Me.ISBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN"
+        Me.ISBNDataGridViewTextBoxColumn.HeaderText = "ISBN"
+        Me.ISBNDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.ISBNDataGridViewTextBoxColumn.Name = "ISBNDataGridViewTextBoxColumn"
+        Me.ISBNDataGridViewTextBoxColumn.Width = 125
+        '
+        'ORDERIDDataGridViewTextBoxColumn1
+        '
+        Me.ORDERIDDataGridViewTextBoxColumn1.DataPropertyName = "ORDER_ID"
+        Me.ORDERIDDataGridViewTextBoxColumn1.HeaderText = "ORDER_ID"
+        Me.ORDERIDDataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.ORDERIDDataGridViewTextBoxColumn1.Name = "ORDERIDDataGridViewTextBoxColumn1"
+        Me.ORDERIDDataGridViewTextBoxColumn1.Width = 125
+        '
+        'COSTEACHDataGridViewTextBoxColumn
+        '
+        Me.COSTEACHDataGridViewTextBoxColumn.DataPropertyName = "COST_EACH"
+        Me.COSTEACHDataGridViewTextBoxColumn.HeaderText = "COST_EACH"
+        Me.COSTEACHDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.COSTEACHDataGridViewTextBoxColumn.Name = "COSTEACHDataGridViewTextBoxColumn"
+        Me.COSTEACHDataGridViewTextBoxColumn.Width = 125
+        '
+        'COSTLINEDataGridViewTextBoxColumn
+        '
+        Me.COSTLINEDataGridViewTextBoxColumn.DataPropertyName = "COST_LINE"
+        Me.COSTLINEDataGridViewTextBoxColumn.HeaderText = "COST_LINE"
+        Me.COSTLINEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.COSTLINEDataGridViewTextBoxColumn.Name = "COSTLINEDataGridViewTextBoxColumn"
+        Me.COSTLINEDataGridViewTextBoxColumn.Width = 125
+        '
+        'QUANTITYDataGridViewTextBoxColumn
+        '
+        Me.QUANTITYDataGridViewTextBoxColumn.DataPropertyName = "QUANTITY"
+        Me.QUANTITYDataGridViewTextBoxColumn.HeaderText = "QUANTITY"
+        Me.QUANTITYDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.QUANTITYDataGridViewTextBoxColumn.Name = "QUANTITYDataGridViewTextBoxColumn"
+        Me.QUANTITYDataGridViewTextBoxColumn.Width = 125
+        '
+        'OrderLineBindingSource
+        '
+        Me.OrderLineBindingSource.DataSource = GetType(BookIn_WFANet.OrderLine)
+        '
+        'btnReloadOrderLine
+        '
+        Me.btnReloadOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReloadOrderLine.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnReloadOrderLine.Location = New System.Drawing.Point(578, 658)
+        Me.btnReloadOrderLine.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReloadOrderLine.Name = "btnReloadOrderLine"
+        Me.btnReloadOrderLine.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnReloadOrderLine.Size = New System.Drawing.Size(85, 47)
+        Me.btnReloadOrderLine.TabIndex = 56
+        Me.btnReloadOrderLine.Text = "Reload"
+        Me.btnReloadOrderLine.UseVisualStyleBackColor = True
+        '
+        'btnExportOrderLine
+        '
+        Me.btnExportOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportOrderLine.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnExportOrderLine.Location = New System.Drawing.Point(578, 603)
+        Me.btnExportOrderLine.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnExportOrderLine.Name = "btnExportOrderLine"
+        Me.btnExportOrderLine.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnExportOrderLine.Size = New System.Drawing.Size(85, 47)
+        Me.btnExportOrderLine.TabIndex = 55
+        Me.btnExportOrderLine.Text = "Export"
+        Me.btnExportOrderLine.UseVisualStyleBackColor = True
+        '
+        'btnImportOrderLine
+        '
+        Me.btnImportOrderLine.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportOrderLine.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnImportOrderLine.Location = New System.Drawing.Point(578, 548)
+        Me.btnImportOrderLine.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnImportOrderLine.Name = "btnImportOrderLine"
+        Me.btnImportOrderLine.Size = New System.Drawing.Size(85, 47)
+        Me.btnImportOrderLine.TabIndex = 54
+        Me.btnImportOrderLine.Text = "Import"
+        Me.btnImportOrderLine.UseVisualStyleBackColor = True
         '
         'OrderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Azure
-        Me.ClientSize = New System.Drawing.Size(1086, 554)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.ClientSize = New System.Drawing.Size(1295, 729)
+        Me.Controls.Add(Me.btnReloadOrderLine)
+        Me.Controls.Add(Me.btnExportOrderLine)
+        Me.Controls.Add(Me.btnImportOrderLine)
+        Me.Controls.Add(Me.dgOrderLine)
+        Me.Controls.Add(Me.btnReloadOrder)
+        Me.Controls.Add(Me.btnExportOrder)
+        Me.Controls.Add(Me.btnImportOrder)
+        Me.Controls.Add(Me.dgOrder)
         Me.Controls.Add(Me.btnDeleteOrderLine)
         Me.Controls.Add(Me.btnUpdateOrderLine)
         Me.Controls.Add(Me.btnAddOrderLine)
@@ -355,7 +507,10 @@ Partial Class OrderForm
         Me.ForeColor = System.Drawing.Color.DarkSlateGray
         Me.Name = "OrderForm"
         Me.Text = "Order"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OrderBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgOrderLine, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OrderLineBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -382,13 +537,24 @@ Partial Class OrderForm
     Friend WithEvents btnDeleteOrderLine As Button
     Friend WithEvents btnUpdateOrderLine As Button
     Friend WithEvents btnAddOrderLine As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Order_ID As DataGridViewTextBoxColumn
-    Friend WithEvents Customer_ID As DataGridViewTextBoxColumn
-    Friend WithEvents Order_Filled As DataGridViewTextBoxColumn
-    Friend WithEvents Order_Line_ID As DataGridViewTextBoxColumn
-    Friend WithEvents ISBN As DataGridViewTextBoxColumn
-    Friend WithEvents Cost_Each As DataGridViewTextBoxColumn
-    Friend WithEvents Quantity As DataGridViewTextBoxColumn
-    Friend WithEvents Cost_Line As DataGridViewTextBoxColumn
+    Friend WithEvents dgOrder As DataGridView
+    Friend WithEvents btnReloadOrder As Button
+    Friend WithEvents btnExportOrder As Button
+    Friend WithEvents btnImportOrder As Button
+    Friend WithEvents dgOrderLine As DataGridView
+    Friend WithEvents btnReloadOrderLine As Button
+    Friend WithEvents btnExportOrderLine As Button
+    Friend WithEvents btnImportOrderLine As Button
+    Friend WithEvents OrderidDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CUSTOMERIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ORDERDATEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ORDERFILLEDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents OrderBindingSource As BindingSource
+    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ISBNDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ORDERIDDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents COSTEACHDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents COSTLINEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents QUANTITYDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents OrderLineBindingSource As BindingSource
 End Class

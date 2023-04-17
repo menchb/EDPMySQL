@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class OrderForm
 
     Private Sub btnAddOrder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddOrder.Click
@@ -231,5 +232,218 @@ Public Class OrderForm
         End With
     End Sub
 
+    Private Sub btnImportOrder_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportOrder.Click
+        Using ofd As New OpenFileDialog() With {.Filter = "CSV file|*.csv"}
+            If ofd.ShowDialog() = DialogResult.OK Then
+                Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList()
+                Dim list As List(Of Order) = New List(Of Order)
+                For i As Integer = 1 To lines.Count - 1
+                    Dim data As String() = lines(i).Split(",")
+                    list.Add(New Order() With {
+                        .order_id = data(0),
+                        .CUSTOMER_ID = data(1),
+                        .ORDER_DATE = data(2),
+                        .ORDER_FILLED = data(3)
+                    })
 
+                Next
+                dgOrder.DataSource = list
+            End If
+        End Using
+
+        Call InsertToDB()
+    End Sub
+
+    Private Sub InsertToDB()
+        With Me
+            Call Connect_to_DB()
+            Dim mycmd As New MySqlCommand
+            Try
+                For i As Integer = 0 To dgOrder.Rows.Count - 1 Step +1
+                    mycmd = New MySqlCommand("Insert into `order` values (@order_id, @CUSTOMER_ID, @ORDER_DATE, @ORDER_FILLED)", myconn)
+                    mycmd.Parameters.Add("@order_id", MySqlDbType.Int64).Value = dgOrder.Rows(i).Cells(0).Value.ToString()
+                    mycmd.Parameters.Add("@CUSTOMER_ID", MySqlDbType.Int64).Value = dgOrder.Rows(i).Cells(1).Value.ToString()
+                    mycmd.Parameters.Add("@ORDER_DATE", MySqlDbType.Date).Value = dgOrder.Rows(i).Cells(2).Value.ToString()
+                    mycmd.Parameters.Add("@ORDER_FILLED", MySqlDbType.Int64).Value = dgOrder.Rows(i).Cells(3).Value.ToString()
+                    mycmd.ExecuteNonQuery()
+                    MsgBox("Order successfully added.")
+                Next
+            Catch ex As MySqlException
+                MsgBox(ex.Number & " " & ex.Message)
+            End Try
+            Disconnect_to_DB()
+        End With
+    End Sub
+
+    Public sqlColumns As String = "order_id, CUSTOMER_ID, ORDER_DATE, ORDER_FILLED"
+
+    Private Sub Load_Data_to_Grid(ByVal strsql As String)
+        Dim myreader As MySqlDataReader
+        Dim mycommand As New MySqlCommand
+        Dim mydataAdapter As New MySqlDataAdapter
+        Dim mydatatable As New DataTable
+        Connect_to_DB()
+        With Me
+            Try
+                mycommand.Connection = myconn
+                mycommand.CommandText = strsql
+                myreader = mycommand.ExecuteReader
+                mydatatable = New DataTable
+                myreader.Close()
+                mydataAdapter.SelectCommand = mycommand
+                mydataAdapter.Fill(mydatatable)
+                dgOrder.AutoSize = True
+                .dgOrder.Refresh()
+                .dgOrder.EndEdit()
+                .dgOrder.DataSource = mydatatable
+                .dgOrder.ReadOnly = True
+                .dgOrder.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+                '.dgOrder.Columns("ORDER_DATE").DefaultCellStyle.Format = "d"
+
+
+            Catch ex As MySqlException
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error on SQL query")
+            End Try
+            myreader = Nothing
+            mycommand = Nothing
+            Disconnect_to_DB()
+        End With
+    End Sub
+
+    Private Sub frmDatagrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Call Load_Data_to_Grid("select " & Me.sqlColumns & " from `order`")
+    End Sub
+
+    Private Sub btnExportOrder_Click(sender As Object, e As EventArgs) Handles btnExportOrder.Click
+        Dim sfd As New SaveFileDialog()
+        sfd.Filter = "CSV File | *.csv"
+        If sfd.ShowDialog() = DialogResult.OK Then
+            Using sw As StreamWriter = File.CreateText(sfd.FileName)
+                Dim dgColumns As List(Of String) = dgOrder.Columns.
+                    Cast(Of DataGridViewColumn).ToList().
+                    Select(Function(c) c.DataPropertyName).ToList()
+                sw.WriteLine(String.Join(",", dgColumns))
+                For Each row As DataGridViewRow In dgOrder.Rows
+                    Dim rowData As New List(Of String)
+                    For Each column As DataGridViewColumn In dgOrder.Columns
+                        rowData.Add(Convert.ToString(row.Cells(column.Name).Value))
+                    Next
+                    sw.WriteLine(String.Join(",", rowData))
+                Next
+                Process.Start(sfd.FileName)
+            End Using
+        End If
+    End Sub
+
+    Private Sub btnReloadOrder_Click(sender As Object, e As EventArgs) Handles btnReloadOrder.Click
+        Call Load_Data_to_Grid("select " & Me.sqlColumns & " from `order`")
+    End Sub
+
+    Private Sub btnImportOrderLine_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportOrderLine.Click
+        Using ofd As New OpenFileDialog() With {.Filter = "CSV file|*.csv"}
+            If ofd.ShowDialog() = DialogResult.OK Then
+                Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList()
+                Dim list As List(Of OrderLine) = New List(Of OrderLine)
+                For i As Integer = 1 To lines.Count - 1
+                    Dim data As String() = lines(i).Split(",")
+                    list.Add(New OrderLine() With {
+                        .ID = data(0),
+                        .ISBN = data(1),
+                        .ORDER_ID = data(2),
+                        .COST_EACH = data(3),
+                        .COST_LINE = data(4),
+                        .QUANTITY = data(5)
+                    })
+
+                Next
+                dgOrderLine.DataSource = list
+            End If
+        End Using
+
+        Call InsertToDB2()
+    End Sub
+
+    Private Sub InsertToDB2()
+        With Me
+            Call Connect_to_DB()
+            Dim mycmd As New MySqlCommand
+            Try
+                For i As Integer = 0 To dgOrderLine.Rows.Count - 1 Step +1
+                    mycmd = New MySqlCommand("Insert into order_line values (@ID, @ISBN, @ORDER_ID, @COST_EACH, @COST_LINE, @QUANTITY)", myconn)
+                    mycmd.Parameters.Add("@ID", MySqlDbType.Int64).Value = dgOrderLine.Rows(i).Cells(0).Value.ToString()
+                    mycmd.Parameters.Add("@ISBN", MySqlDbType.Int64).Value = dgOrderLine.Rows(i).Cells(1).Value.ToString()
+                    mycmd.Parameters.Add("@ORDER_ID", MySqlDbType.Int64).Value = dgOrderLine.Rows(i).Cells(2).Value.ToString()
+                    mycmd.Parameters.Add("@COST_EACH", MySqlDbType.Int64).Value = dgOrderLine.Rows(i).Cells(3).Value.ToString()
+                    mycmd.Parameters.Add("@COST_LINE", MySqlDbType.Int64).Value = dgOrderLine.Rows(i).Cells(4).Value.ToString()
+                    mycmd.Parameters.Add("@QUANTITY", MySqlDbType.Int64).Value = dgOrderLine.Rows(i).Cells(5).Value.ToString()
+                    mycmd.ExecuteNonQuery()
+                    MsgBox("Order Line successfully added.")
+                Next
+            Catch ex As MySqlException
+                MsgBox(ex.Number & " " & ex.Message)
+            End Try
+            Disconnect_to_DB()
+        End With
+    End Sub
+
+    Public sqlColumns2 As String = "ID, ISBN, ORDER_ID, COST_EACH, COST_LINE, QUANTITY"
+
+    Private Sub Load_Data_to_Grid2(ByVal strsql As String)
+        Dim myreader As MySqlDataReader
+        Dim mycommand As New MySqlCommand
+        Dim mydataAdapter As New MySqlDataAdapter
+        Dim mydatatable As New DataTable
+        Connect_to_DB()
+        With Me
+            Try
+                mycommand.Connection = myconn
+                mycommand.CommandText = strsql
+                myreader = mycommand.ExecuteReader
+                mydatatable = New DataTable
+                myreader.Close()
+                mydataAdapter.SelectCommand = mycommand
+                mydataAdapter.Fill(mydatatable)
+                dgOrderLine.AutoSize = True
+                .dgOrderLine.Refresh()
+                .dgOrderLine.EndEdit()
+                .dgOrderLine.DataSource = mydatatable
+                .dgOrderLine.ReadOnly = True
+                .dgOrderLine.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+            Catch ex As MySqlException
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error on SQL query")
+            End Try
+            myreader = Nothing
+            mycommand = Nothing
+            Disconnect_to_DB()
+        End With
+    End Sub
+
+    Private Sub frmDatagrid_Load2(sender As Object, e As EventArgs) Handles MyBase.Load
+        Call Load_Data_to_Grid2("select " & Me.sqlColumns2 & " from order_line")
+    End Sub
+
+    Private Sub btnExportOrderLine_Click(sender As Object, e As EventArgs) Handles btnExportOrderLine.Click
+        Dim sfd As New SaveFileDialog()
+        sfd.Filter = "CSV File | *.csv"
+        If sfd.ShowDialog() = DialogResult.OK Then
+            Using sw As StreamWriter = File.CreateText(sfd.FileName)
+                Dim dgColumns As List(Of String) = dgOrderLine.Columns.
+                    Cast(Of DataGridViewColumn).ToList().
+                    Select(Function(c) c.DataPropertyName).ToList()
+                sw.WriteLine(String.Join(",", dgColumns))
+                For Each row As DataGridViewRow In dgOrderLine.Rows
+                    Dim rowData As New List(Of String)
+                    For Each column As DataGridViewColumn In dgOrderLine.Columns
+                        rowData.Add(Convert.ToString(row.Cells(column.Name).Value))
+                    Next
+                    sw.WriteLine(String.Join(",", rowData))
+                Next
+                Process.Start(sfd.FileName)
+            End Using
+        End If
+    End Sub
+
+    Private Sub btnReloadOrderLine_Click(sender As Object, e As EventArgs) Handles btnReloadOrderLine.Click
+        Call Load_Data_to_Grid2("select " & Me.sqlColumns2 & " from order_line")
+    End Sub
 End Class

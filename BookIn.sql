@@ -314,5 +314,14 @@ SELECT character_set_name FROM information_schema.`COLUMNS`
 WHERE table_schema = "bookin"
   AND table_name = "book"
   AND column_name = "isbn";
-  
-  
+
+use bookin;
+select * into outfile
+'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/export.csv'
+fields terminated by ',' lines terminated by '\r\n' from book;
+
+select * from `order_line`;
+
+select * from `order`;
+describe `order`;
+select md5("user3");

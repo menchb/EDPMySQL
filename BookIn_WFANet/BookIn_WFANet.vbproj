@@ -48,6 +48,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.32.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\MySQL\Connector NET 8.0\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
@@ -77,18 +81,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.vb" />
     <Compile Include="AdminForm.Designer.vb">
       <DependentUpon>AdminForm.vb</DependentUpon>
     </Compile>
     <Compile Include="AdminForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Author.vb" />
+    <Compile Include="Book.vb" />
     <Compile Include="BookForm.Designer.vb">
       <DependentUpon>BookForm.vb</DependentUpon>
     </Compile>
     <Compile Include="BookForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Customer.vb" />
     <Compile Include="CustomerForm.Designer.vb">
       <DependentUpon>CustomerForm.vb</DependentUpon>
     </Compile>
@@ -107,6 +115,7 @@
     <Compile Include="LoginForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Microsoft\Office.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -123,12 +132,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Order.vb" />
     <Compile Include="OrderForm.Designer.vb">
       <DependentUpon>OrderForm.vb</DependentUpon>
     </Compile>
     <Compile Include="OrderForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OrderLine.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AdminForm.resx">
@@ -161,12 +172,18 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\Admin.datasource" />
+    <None Include="My Project\DataSources\Book.datasource" />
+    <None Include="My Project\DataSources\Customer.datasource" />
+    <None Include="My Project\DataSources\Order.datasource" />
+    <None Include="My Project\DataSources\OrderLine.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BookInLogo.png" />

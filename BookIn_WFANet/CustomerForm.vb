@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class CustomerForm
 
@@ -142,4 +143,132 @@ Public Class CustomerForm
             HomeForm.Show()
         End With
     End Sub
+
+    Private Sub btnImportCustomer_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportCustomer.Click
+        Using ofd As New OpenFileDialog() With {.Filter = "CSV file|*.csv"}
+            If ofd.ShowDialog() = DialogResult.OK Then
+                Dim lines As List(Of String) = File.ReadAllLines(ofd.FileName).ToList()
+                Dim list As List(Of Customer) = New List(Of Customer)
+                For i As Integer = 1 To lines.Count - 1
+                    Dim data As String() = lines(i).Split(",")
+                    list.Add(New Customer() With {
+                        .ID = data(0),
+                        .FIRST_NAME = data(1),
+                        .LAST_NAME = data(2),
+                        .CITY = data(3),
+                        .PROVINCE = data(4),
+                        .ZIP = data(5),
+                        .PHONE = data(6),
+                        .EMAIL = data(7),
+                        .TOTAL_SPENT = data(8)
+                    })
+
+
+                Next
+                dgCustomer.DataSource = list
+            End If
+        End Using
+
+        Call InsertToDB()
+    End Sub
+
+    Private Sub InsertToDB()
+
+        With Me
+            Call Connect_to_DB()
+            Dim mycmd As New MySqlCommand
+
+            Try
+                For i As Integer = 0 To dgCustomer.Rows.Count - 1 Step +1
+                    mycmd = New MySqlCommand("Insert into customer values (@ID, @FIRST_NAME, @LAST_NAME, @CITY, @PROVINCE, @ZIP, @PHONE, @EMAIL, @TOTAL_SPENT)", myconn)
+                    mycmd.Parameters.Add("@ID", MySqlDbType.Int64).Value = dgCustomer.Rows(i).Cells(0).Value.ToString()
+                    mycmd.Parameters.Add("@FIRST_NAME", MySqlDbType.VarChar).Value = dgCustomer.Rows(i).Cells(1).Value.ToString()
+                    mycmd.Parameters.Add("@LAST_NAME", MySqlDbType.VarChar).Value = dgCustomer.Rows(i).Cells(2).Value.ToString()
+                    mycmd.Parameters.Add("@CITY", MySqlDbType.VarChar).Value = dgCustomer.Rows(i).Cells(3).Value.ToString()
+                    mycmd.Parameters.Add("@PROVINCE", MySqlDbType.VarChar).Value = dgCustomer.Rows(i).Cells(4).Value.ToString()
+                    mycmd.Parameters.Add("@ZIP", MySqlDbType.Int64).Value = dgCustomer.Rows(i).Cells(5).Value.ToString()
+                    mycmd.Parameters.Add("@PHONE", MySqlDbType.VarChar).Value = dgCustomer.Rows(i).Cells(6).Value.ToString()
+                    mycmd.Parameters.Add("@EMAIL", MySqlDbType.VarChar).Value = dgCustomer.Rows(i).Cells(7).Value.ToString()
+                    mycmd.Parameters.Add("@TOTAL_SPENT", MySqlDbType.Double).Value = dgCustomer.Rows(i).Cells(8).Value.ToString()
+
+                    'mycmd.Connection = myconn
+                    mycmd.ExecuteNonQuery()
+                    MsgBox("Customer successfully added.")
+                Next
+            Catch ex As MySqlException
+                MsgBox(ex.Number & " " & ex.Message)
+            End Try
+
+            Disconnect_to_DB()
+        End With
+
+
+    End Sub
+
+    Public sqlColumns As String = "id, first_name, last_name, city, province, zip, phone, email, total_spent"
+    Private Sub Load_Data_to_Grid(ByVal strsql As String)
+        Dim myreader As MySqlDataReader
+        Dim mycommand As New MySqlCommand
+        Dim mydataAdapter As New MySqlDataAdapter
+        Dim mydatatable As New DataTable
+
+        Connect_to_DB()
+        With Me
+            Try
+                mycommand.Connection = myconn
+                mycommand.CommandText = strsql
+                myreader = mycommand.ExecuteReader
+                mydatatable = New DataTable
+
+                myreader.Close()
+                mydataAdapter.SelectCommand = mycommand
+
+                mydataAdapter.Fill(mydatatable)
+                dgCustomer.AutoSize = True
+                .dgCustomer.Refresh()
+                .dgCustomer.EndEdit()
+                .dgCustomer.DataSource = mydatatable
+                .dgCustomer.ReadOnly = True
+                .dgCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+
+            Catch ex As MySqlException
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error on SQL query")
+            End Try
+            myreader = Nothing
+            mycommand = Nothing
+            Disconnect_to_DB()
+        End With
+    End Sub
+    Private Sub frmDatagrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Call Load_Data_to_Grid("select " & Me.sqlColumns & " from customer")
+    End Sub
+
+    Private Sub btnExportCustomer_Click(sender As Object, e As EventArgs) Handles btnExportCustomer.Click
+        Dim sfd As New SaveFileDialog()
+        sfd.Filter = "CSV File | *.csv"
+
+        If sfd.ShowDialog() = DialogResult.OK Then
+            Using sw As StreamWriter = File.CreateText(sfd.FileName)
+                Dim dgColumns As List(Of String) = dgCustomer.Columns.
+                    Cast(Of DataGridViewColumn).ToList().
+                    Select(Function(c) c.DataPropertyName).ToList()
+                sw.WriteLine(String.Join(",", dgColumns))
+
+                For Each row As DataGridViewRow In dgCustomer.Rows
+                    Dim rowData As New List(Of String)
+                    For Each column As DataGridViewColumn In dgCustomer.Columns
+                        rowData.Add(Convert.ToString(row.Cells(column.Name).Value))
+                    Next
+                    sw.WriteLine(String.Join(",", rowData))
+                Next
+
+                Process.Start(sfd.FileName)
+            End Using
+        End If
+    End Sub
+
+    Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+        Call Load_Data_to_Grid("select " & Me.sqlColumns & " from customer")
+    End Sub
+
 End Class

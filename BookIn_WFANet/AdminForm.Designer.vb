@@ -22,6 +22,7 @@ Partial Class AdminForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -32,10 +33,16 @@ Partial Class AdminForm
         Me.UsernameLabel = New System.Windows.Forms.Label()
         Me.PasswordTextBox = New System.Windows.Forms.TextBox()
         Me.PasswordLabel = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgAdmin = New System.Windows.Forms.DataGridView()
+        Me.btnReload = New System.Windows.Forms.Button()
+        Me.btnExportAdmin = New System.Windows.Forms.Button()
+        Me.btnImportAdmin = New System.Windows.Forms.Button()
+        Me.AdminBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.UsernameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PasswordDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.dgAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AdminBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnBack
@@ -143,38 +150,98 @@ Partial Class AdminForm
         Me.PasswordLabel.TabIndex = 29
         Me.PasswordLabel.Text = "Password"
         '
-        'DataGridView1
+        'dgAdmin
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Username})
-        Me.DataGridView1.Location = New System.Drawing.Point(508, -2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(579, 559)
-        Me.DataGridView1.TabIndex = 47
+        Me.dgAdmin.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgAdmin.AutoGenerateColumns = False
+        Me.dgAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgAdmin.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UsernameDataGridViewTextBoxColumn, Me.PasswordDataGridViewTextBoxColumn, Me.IdDataGridViewTextBoxColumn})
+        Me.dgAdmin.DataSource = Me.AdminBindingSource
+        Me.dgAdmin.Location = New System.Drawing.Point(508, -2)
+        Me.dgAdmin.Name = "dgAdmin"
+        Me.dgAdmin.RowHeadersWidth = 51
+        Me.dgAdmin.RowTemplate.Height = 24
+        Me.dgAdmin.Size = New System.Drawing.Size(579, 734)
+        Me.dgAdmin.TabIndex = 47
         '
-        'ID
+        'btnReload
         '
-        Me.ID.HeaderText = "ID"
-        Me.ID.MinimumWidth = 6
-        Me.ID.Name = "ID"
-        Me.ID.Width = 200
+        Me.btnReload.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReload.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnReload.Location = New System.Drawing.Point(208, 585)
+        Me.btnReload.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReload.Name = "btnReload"
+        Me.btnReload.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnReload.Size = New System.Drawing.Size(85, 47)
+        Me.btnReload.TabIndex = 55
+        Me.btnReload.Text = "Reload"
+        Me.btnReload.UseVisualStyleBackColor = True
         '
-        'Username
+        'btnExportAdmin
         '
-        Me.Username.HeaderText = "Username"
-        Me.Username.MinimumWidth = 6
-        Me.Username.Name = "Username"
-        Me.Username.Width = 350
+        Me.btnExportAdmin.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportAdmin.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnExportAdmin.Location = New System.Drawing.Point(301, 585)
+        Me.btnExportAdmin.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnExportAdmin.Name = "btnExportAdmin"
+        Me.btnExportAdmin.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnExportAdmin.Size = New System.Drawing.Size(85, 47)
+        Me.btnExportAdmin.TabIndex = 54
+        Me.btnExportAdmin.Text = "Export"
+        Me.btnExportAdmin.UseVisualStyleBackColor = True
+        '
+        'btnImportAdmin
+        '
+        Me.btnImportAdmin.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportAdmin.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnImportAdmin.Location = New System.Drawing.Point(394, 585)
+        Me.btnImportAdmin.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnImportAdmin.Name = "btnImportAdmin"
+        Me.btnImportAdmin.Size = New System.Drawing.Size(85, 47)
+        Me.btnImportAdmin.TabIndex = 53
+        Me.btnImportAdmin.Text = "Import"
+        Me.btnImportAdmin.UseVisualStyleBackColor = True
+        '
+        'AdminBindingSource
+        '
+        Me.AdminBindingSource.DataSource = GetType(BookIn_WFANet.Admin)
+        '
+        'UsernameDataGridViewTextBoxColumn
+        '
+        Me.UsernameDataGridViewTextBoxColumn.DataPropertyName = "username"
+        Me.UsernameDataGridViewTextBoxColumn.HeaderText = "username"
+        Me.UsernameDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.UsernameDataGridViewTextBoxColumn.Name = "UsernameDataGridViewTextBoxColumn"
+        Me.UsernameDataGridViewTextBoxColumn.Width = 125
+        '
+        'PasswordDataGridViewTextBoxColumn
+        '
+        Me.PasswordDataGridViewTextBoxColumn.DataPropertyName = "password"
+        Me.PasswordDataGridViewTextBoxColumn.HeaderText = "password"
+        Me.PasswordDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.PasswordDataGridViewTextBoxColumn.Name = "PasswordDataGridViewTextBoxColumn"
+        Me.PasswordDataGridViewTextBoxColumn.Width = 125
+        '
+        'IdDataGridViewTextBoxColumn
+        '
+        Me.IdDataGridViewTextBoxColumn.DataPropertyName = "id"
+        Me.IdDataGridViewTextBoxColumn.HeaderText = "id"
+        Me.IdDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn"
+        Me.IdDataGridViewTextBoxColumn.Width = 125
         '
         'AdminForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Azure
-        Me.ClientSize = New System.Drawing.Size(1086, 554)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.ClientSize = New System.Drawing.Size(1086, 729)
+        Me.Controls.Add(Me.btnReload)
+        Me.Controls.Add(Me.btnExportAdmin)
+        Me.Controls.Add(Me.btnImportAdmin)
+        Me.Controls.Add(Me.dgAdmin)
         Me.Controls.Add(Me.PasswordTextBox)
         Me.Controls.Add(Me.PasswordLabel)
         Me.Controls.Add(Me.UsernameTextBox)
@@ -189,7 +256,8 @@ Partial Class AdminForm
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "AdminForm"
         Me.Text = "Admin"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgAdmin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AdminBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -205,7 +273,12 @@ Partial Class AdminForm
     Friend WithEvents UsernameLabel As Label
     Friend WithEvents PasswordTextBox As TextBox
     Friend WithEvents PasswordLabel As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Username As DataGridViewTextBoxColumn
+    Friend WithEvents dgAdmin As DataGridView
+    Friend WithEvents btnReload As Button
+    Friend WithEvents btnExportAdmin As Button
+    Friend WithEvents btnImportAdmin As Button
+    Friend WithEvents UsernameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PasswordDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents IdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents AdminBindingSource As BindingSource
 End Class

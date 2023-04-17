@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class BookForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class BookForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ISBNLabel = New System.Windows.Forms.Label()
         Me.ISBNTextBox = New System.Windows.Forms.TextBox()
         Me.TitleTextBox = New System.Windows.Forms.TextBox()
@@ -40,15 +41,20 @@ Partial Class BookForm
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ISBN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Publication_Year = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Stocks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Retail_Price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Author = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Publisher = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgBook = New System.Windows.Forms.DataGridView()
+        Me.btnImportBook = New System.Windows.Forms.Button()
+        Me.btnExportBook = New System.Windows.Forms.Button()
+        Me.ISBNDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TITLEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RETAILPRICEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.STOCKSDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AUTHORIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PUBLISHERIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BookBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnReload = New System.Windows.Forms.Button()
+        CType(Me.dgBook, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BookBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ISBNLabel
@@ -253,73 +259,137 @@ Partial Class BookForm
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dgBook
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ISBN, Me.Title, Me.Publication_Year, Me.Stocks, Me.Retail_Price, Me.Author, Me.Publisher})
-        Me.DataGridView1.Location = New System.Drawing.Point(508, -2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(579, 559)
-        Me.DataGridView1.TabIndex = 46
+        Me.dgBook.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgBook.AutoGenerateColumns = False
+        Me.dgBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgBook.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ISBNDataGridViewTextBoxColumn, Me.TITLEDataGridViewTextBoxColumn, Me.PUBLICATIONYEARDataGridViewTextBoxColumn, Me.RETAILPRICEDataGridViewTextBoxColumn, Me.STOCKSDataGridViewTextBoxColumn, Me.AUTHORIDDataGridViewTextBoxColumn, Me.PUBLISHERIDDataGridViewTextBoxColumn})
+        Me.dgBook.DataSource = Me.BookBindingSource
+        Me.dgBook.Location = New System.Drawing.Point(508, -2)
+        Me.dgBook.Name = "dgBook"
+        Me.dgBook.RowHeadersWidth = 51
+        Me.dgBook.RowTemplate.Height = 24
+        Me.dgBook.Size = New System.Drawing.Size(579, 734)
+        Me.dgBook.TabIndex = 46
         '
-        'ISBN
+        'btnImportBook
         '
-        Me.ISBN.HeaderText = "ISBN"
-        Me.ISBN.MinimumWidth = 6
-        Me.ISBN.Name = "ISBN"
-        Me.ISBN.Width = 80
+        Me.btnImportBook.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportBook.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnImportBook.Location = New System.Drawing.Point(394, 624)
+        Me.btnImportBook.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnImportBook.Name = "btnImportBook"
+        Me.btnImportBook.Size = New System.Drawing.Size(85, 47)
+        Me.btnImportBook.TabIndex = 47
+        Me.btnImportBook.Text = "Import"
+        Me.btnImportBook.UseVisualStyleBackColor = True
         '
-        'Title
+        'btnExportBook
         '
-        Me.Title.HeaderText = "Title"
-        Me.Title.MinimumWidth = 6
-        Me.Title.Name = "Title"
-        Me.Title.Width = 80
+        Me.btnExportBook.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportBook.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnExportBook.Location = New System.Drawing.Point(301, 624)
+        Me.btnExportBook.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnExportBook.Name = "btnExportBook"
+        Me.btnExportBook.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnExportBook.Size = New System.Drawing.Size(85, 47)
+        Me.btnExportBook.TabIndex = 48
+        Me.btnExportBook.Text = "Export"
+        Me.btnExportBook.UseVisualStyleBackColor = True
         '
-        'Publication_Year
+        'ISBNDataGridViewTextBoxColumn
         '
-        Me.Publication_Year.HeaderText = "Publication Year"
-        Me.Publication_Year.MinimumWidth = 6
-        Me.Publication_Year.Name = "Publication_Year"
-        Me.Publication_Year.Width = 50
+        Me.ISBNDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.ISBNDataGridViewTextBoxColumn.DataPropertyName = "ISBN"
+        Me.ISBNDataGridViewTextBoxColumn.HeaderText = "ISBN"
+        Me.ISBNDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.ISBNDataGridViewTextBoxColumn.Name = "ISBNDataGridViewTextBoxColumn"
+        Me.ISBNDataGridViewTextBoxColumn.Width = 68
         '
-        'Stocks
+        'TITLEDataGridViewTextBoxColumn
         '
-        Me.Stocks.HeaderText = "Stocks"
-        Me.Stocks.MinimumWidth = 6
-        Me.Stocks.Name = "Stocks"
-        Me.Stocks.Width = 50
+        Me.TITLEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TITLEDataGridViewTextBoxColumn.DataPropertyName = "TITLE"
+        Me.TITLEDataGridViewTextBoxColumn.HeaderText = "TITLE"
+        Me.TITLEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.TITLEDataGridViewTextBoxColumn.Name = "TITLEDataGridViewTextBoxColumn"
+        Me.TITLEDataGridViewTextBoxColumn.Width = 75
         '
-        'Retail_Price
+        'PUBLICATIONYEARDataGridViewTextBoxColumn
         '
-        Me.Retail_Price.HeaderText = "Retail Price"
-        Me.Retail_Price.MinimumWidth = 6
-        Me.Retail_Price.Name = "Retail_Price"
-        Me.Retail_Price.Width = 50
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn.DataPropertyName = "PUBLICATION_YEAR"
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn.HeaderText = "PUBLICATION_YEAR"
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn.Name = "PUBLICATIONYEARDataGridViewTextBoxColumn"
+        Me.PUBLICATIONYEARDataGridViewTextBoxColumn.Width = 172
         '
-        'Author
+        'RETAILPRICEDataGridViewTextBoxColumn
         '
-        Me.Author.HeaderText = "Author"
-        Me.Author.MinimumWidth = 6
-        Me.Author.Name = "Author"
-        Me.Author.Width = 125
+        Me.RETAILPRICEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.RETAILPRICEDataGridViewTextBoxColumn.DataPropertyName = "RETAIL_PRICE"
+        Me.RETAILPRICEDataGridViewTextBoxColumn.HeaderText = "RETAIL_PRICE"
+        Me.RETAILPRICEDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.RETAILPRICEDataGridViewTextBoxColumn.Name = "RETAILPRICEDataGridViewTextBoxColumn"
+        Me.RETAILPRICEDataGridViewTextBoxColumn.Width = 133
         '
-        'Publisher
+        'STOCKSDataGridViewTextBoxColumn
         '
-        Me.Publisher.HeaderText = "Publisher"
-        Me.Publisher.MinimumWidth = 6
-        Me.Publisher.Name = "Publisher"
-        Me.Publisher.Width = 125
+        Me.STOCKSDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.STOCKSDataGridViewTextBoxColumn.DataPropertyName = "STOCKS"
+        Me.STOCKSDataGridViewTextBoxColumn.HeaderText = "STOCKS"
+        Me.STOCKSDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.STOCKSDataGridViewTextBoxColumn.Name = "STOCKSDataGridViewTextBoxColumn"
+        Me.STOCKSDataGridViewTextBoxColumn.Width = 93
+        '
+        'AUTHORIDDataGridViewTextBoxColumn
+        '
+        Me.AUTHORIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.AUTHORIDDataGridViewTextBoxColumn.DataPropertyName = "AUTHOR_ID"
+        Me.AUTHORIDDataGridViewTextBoxColumn.HeaderText = "AUTHOR_ID"
+        Me.AUTHORIDDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.AUTHORIDDataGridViewTextBoxColumn.Name = "AUTHORIDDataGridViewTextBoxColumn"
+        Me.AUTHORIDDataGridViewTextBoxColumn.Width = 117
+        '
+        'PUBLISHERIDDataGridViewTextBoxColumn
+        '
+        Me.PUBLISHERIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.PUBLISHERIDDataGridViewTextBoxColumn.DataPropertyName = "PUBLISHER_ID"
+        Me.PUBLISHERIDDataGridViewTextBoxColumn.HeaderText = "PUBLISHER_ID"
+        Me.PUBLISHERIDDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.PUBLISHERIDDataGridViewTextBoxColumn.Name = "PUBLISHERIDDataGridViewTextBoxColumn"
+        Me.PUBLISHERIDDataGridViewTextBoxColumn.Width = 135
+        '
+        'BookBindingSource
+        '
+        Me.BookBindingSource.DataSource = GetType(BookIn_WFANet.Book)
+        '
+        'btnReload
+        '
+        Me.btnReload.Font = New System.Drawing.Font("Calibri", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReload.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.btnReload.Location = New System.Drawing.Point(208, 624)
+        Me.btnReload.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReload.Name = "btnReload"
+        Me.btnReload.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnReload.Size = New System.Drawing.Size(85, 47)
+        Me.btnReload.TabIndex = 49
+        Me.btnReload.Text = "Reload"
+        Me.btnReload.UseVisualStyleBackColor = True
         '
         'BookForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Azure
-        Me.ClientSize = New System.Drawing.Size(1086, 554)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.ClientSize = New System.Drawing.Size(1086, 729)
+        Me.Controls.Add(Me.btnReload)
+        Me.Controls.Add(Me.dgBook)
+        Me.Controls.Add(Me.btnExportBook)
+        Me.Controls.Add(Me.btnImportBook)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
@@ -341,7 +411,8 @@ Partial Class BookForm
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "BookForm"
         Me.Text = "Book"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgBook, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BookBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -364,12 +435,16 @@ Partial Class BookForm
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnAdd As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents ISBN As DataGridViewTextBoxColumn
-    Friend WithEvents Title As DataGridViewTextBoxColumn
-    Friend WithEvents Publication_Year As DataGridViewTextBoxColumn
-    Friend WithEvents Stocks As DataGridViewTextBoxColumn
-    Friend WithEvents Retail_Price As DataGridViewTextBoxColumn
-    Friend WithEvents Author As DataGridViewTextBoxColumn
-    Friend WithEvents Publisher As DataGridViewTextBoxColumn
+    Friend WithEvents dgBook As DataGridView
+    Friend WithEvents btnImportBook As Button
+    Friend WithEvents BookBindingSource As BindingSource
+    Friend WithEvents btnExportBook As Button
+    Friend WithEvents ISBNDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents TITLEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PUBLICATIONYEARDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents RETAILPRICEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents STOCKSDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents AUTHORIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PUBLISHERIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btnReload As Button
 End Class

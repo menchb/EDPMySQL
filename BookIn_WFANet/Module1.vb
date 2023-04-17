@@ -1,8 +1,16 @@
-﻿Imports MySql.Data.MySqlClient
+﻿
+Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 Module Module1
     Public myconn As New MySql.Data.MySqlClient.MySqlConnection
     Public myConnectionString As String
     Public strSQL As String
+
+    Public currentDate As DateTime = DateTime.Now
+    Public strpassword = "menchie"
+    Public xlsPath As String = System.IO.Directory.GetCurrentDirectory & "\..\..\dataXls\TEMPLATE\"
+    Public xlsFiles As String = System.IO.Directory.GetCurrentDirectory & "\..\..\dataXls\"
+
 
     Public Sub Connect_to_DB()
         myConnectionString = "server=127.0.0.1;" _
@@ -29,4 +37,7 @@ Module Module1
         myconn.Close()
         myconn.Dispose()
     End Sub
+
+
+
 End Module
